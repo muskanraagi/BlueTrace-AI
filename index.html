@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BLUTRACE AI | SIH26057</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <button class="brand" data-go="upload" aria-label="Go to upload screen"><span class="brand-mark">B</span><span>BLUTRACE <b>AI</b></span></button>
+        <div class="project-meta"><span>SIH26057</span><i></i><span>MoES · NIOT</span></div>
+        <div class="live"><span></span> DEMO MODE</div>
+      </header>
+      <nav class="workflow" aria-label="Workflow navigation">
+        <button data-go="upload"><em>01</em> Upload</button><span></span>
+        <button data-go="processing"><em>02</em> Processing</button><span></span>
+        <button data-go="detection"><em>03</em> Detection</button><span></span>
+        <button data-go="geolocation"><em>04</em> Geolocation</button><span></span>
+        <button data-go="report"><em>05</em> Report</button>
+      </nav>
+
+      <main>
+        <section class="screen active" id="upload">
+          <div class="hero-copy"><p class="eyebrow">AUTOMATED SSS ANALYSIS</p><h1>From sonar survey<br/>to actionable <span>intelligence.</span></h1><p class="lede">BLUTRACE automatically detects underwater man-made objects, validates acoustic evidence, geolocates confirmed targets and generates an anomaly report.</p></div>
+          <div class="upload-grid">
+            <label class="upload-card primary"><input type="file" accept=".jpg,.jpeg,.png,.tif,.tiff"/><div class="upload-icon">⇧</div><strong>Upload Side-Scan Sonar Data</strong><small>SSS imagery · JPG · PNG · TIFF</small><span class="file-name">Drop file here or browse</span></label>
+            <label class="upload-card"><input type="file" accept=".csv,.xlsx,.json"/><div class="upload-icon">⌖</div><strong>Navigation / Position Data</strong><small>Ping headers · GPS · Towfish metadata<br/>Accepted formats: CSV · XLSX · JSON</small><span class="file-name">Drop file here or browse</span></label>
+          </div>
+          <div class="upload-footer"><div class="trust-note"><span>✦</span><p><b>Two independent funnels.</b> Detection identifies the acoustic pattern; navigation metadata calculates its real-world position.</p></div><button class="button" id="run-analysis" disabled>Start automated analysis <b>→</b></button></div>
+        </section>
+
+        <section class="screen" id="processing">
+          <div class="section-heading"><div><p class="eyebrow">MISSION BT-2409-17</p><h2>Processing sonar survey</h2><p class="screen-subtitle">Preparing sonar data for object detection</p></div><div class="status-pill processing" id="processing-status">● READY TO START</div></div>
+          <div class="processing-layout">
+            <div class="sonar-preview processing-sonar"><div class="scanline"></div><div class="processing-label">SIDE-SCAN SONAR · PORT / STARBOARD</div><div class="target-blip one"></div><div class="target-blip two"></div></div>
+            <div class="pipeline-panel"><div class="progress-number"><span id="progress-value">0</span><small>% COMPLETE</small></div><div class="progress-track"><i id="progress-bar"></i></div><div class="pipeline" id="pipeline"></div><button class="button processing-action" id="start-preprocessing">Start preprocessing <b>→</b></button><button class="button processing-action continue-action" id="continue-detection" hidden>Continue to detection <b>→</b></button></div>
+          </div>
+          <div class="auto-note"><span>✓</span><div><b>Fully automated workflow</b><p>No mandatory human-verification stage. Acoustic validation is performed automatically after detection.</p></div></div>
+        </section>
+
+        <section class="screen" id="detection">
+          <div class="section-heading"><div><p class="eyebrow">FUNNEL 1 · WHAT IS IT?</p><h2>Object detection & acoustic validation</h2></div><div class="status-pill confirmed">✓ CONFIRMED TARGET</div></div>
+          <div class="detection-layout"><div class="sonar-view"><div class="sonar-header"><span>SSS / SWATH 08 · 12.5m altitude</span><span>Resolution 0.12 m/px</span></div><div class="sonar-art"><div class="sonar-ripple r1"></div><div class="sonar-ripple r2"></div><div class="seabed-noise"></div><button class="bbox selected" data-target="wreck"><span>T-001 · SHIPWRECK</span></button><button class="bbox ghost" data-target="net"><span>T-002 · GHOST NET</span></button><button class="bbox rejected" data-target="natural"><span>REJECTED</span></button><div class="scale">0m <i></i> 10m</div></div><div class="sonar-legend"><span><i class="cyan"></i> Confirmed</span><span><i class="amber"></i> Candidate</span><span><i class="slate"></i> Rejected after validation</span></div></div>
+            <aside class="target-panel"><p class="panel-kicker">SELECTED TARGET</p><div class="target-title"><span class="target-id">T-001</span><h3 id="target-class">Shipwreck</h3></div><div class="metric-row"><div><small>DETECTION CONFIDENCE</small><b id="target-confidence">91%</b></div><div><small>EST. DIMENSIONS</small><b id="target-dimensions">18.4 × 5.2 m</b></div></div><div class="evidence"><p>ACOUSTIC EVIDENCE VALIDATION</p><ul><li>Target return intensity <b>✓</b></li><li>Acoustic shadow presence <b>✓</b></li><li>Shadow-to-return alignment <b>✓</b></li><li>Geometric consistency <b>✓</b></li><li>Local contrast consistency <b>✓</b></li></ul></div><div class="final-confidence"><small>FINAL CONFIDENCE</small><b>91%</b><span>CONFIRMED</span></div><button class="text-button" data-go="geolocation">Continue to geolocation <b>→</b></button></aside></div>
+          <p class="disclaimer">Classification describes a trained acoustic-pattern match; it does not identify an object's material composition.</p>
+        </section>
+
+        <section class="screen" id="geolocation">
+          <div class="section-heading"><div><p class="eyebrow">FUNNEL 2 · WHERE IS IT?</p><h2>Calculated target geolocation</h2></div><div class="status-pill processing" id="geo-status">● CALCULATING POSITION</div></div>
+          <div class="geo-progress-panel" id="geo-progress-panel"><p class="panel-kicker">NAVIGATION & GEOLOCATION COMPUTATION · DEMO MODE</p><div class="geo-progress-track"><i id="geo-progress-bar"></i></div><div id="geo-pipeline"></div></div>
+          <div id="geo-results" hidden>
+          <div class="geo-explainer"><div><small>VESSEL / SONAR GPS</small><strong>28.6139° N<br/>77.2090° E</strong></div><b>+</b><div><small>TARGET RELATIVE OFFSET</small><strong>+18.7 m North<br/>+42.3 m East</strong></div><b>=</b><div class="result"><small>CALCULATED TARGET POSITION</small><strong>28.6141° N<br/>77.2094° E</strong></div></div>
+          <section class="calculation-note" aria-label="Geolocation Calculation"><div><p class="panel-kicker">GEOLOCATION CALCULATION · DEMO MODE · NOT A TRAINED AI MODEL</p><p>Target position is calculated by combining the survey vessel/sonar GPS position with the detected target's relative offset.</p></div><div class="geo-flow"><span>SONAR-RELATIVE<br/>OFFSET</span><i>→</i><span>APPLY VESSEL /<br/>SONAR HEADING</span><i>→</i><span>SIGNED NORTH/SOUTH<br/>+ EAST/WEST OFFSET</span><i>→</i><span>GLOBAL TARGET<br/>POSITION</span><small>Signed offsets support all directions: +North / −South and +East / −West.</small></div></section>
+          <div class="geo-layout"><div class="map"><div class="map-grid"></div><div class="survey-track"></div><div class="vessel-marker"><i>◈</i><span>VESSEL / SONAR</span></div><div class="target-marker"><i>✦</i><span>T-001<br/><b>28.6141° N, 77.2094° E</b></span></div><div class="map-coords">N 28.6150° &nbsp; E 77.2090°<br/><br/>SURVEY AREA · 0.84 km²</div></div><aside class="location-panel"><p class="panel-kicker">TARGET GEOLOCATION</p><h3>Shipwreck <span>CRITICAL</span></h3><dl><div><dt>Target ID</dt><dd>T-001</dd></div><div><dt>Latitude</dt><dd>28.6141° N</dd></div><div><dt>Longitude</dt><dd>77.2094° E</dd></div><div><dt>Relative position</dt><dd>18.7m N · 42.3m E</dd></div><div><dt>Estimated dimensions</dt><dd>18.4m × 5.2m</dd></div></dl><div class="formula">Target global position =<br/><b>Vessel / sonar GPS + signed target offset</b></div><button class="text-button" data-go="report">View anomaly report <b>→</b></button></aside></div>
+          </div>
+        </section>
+
+        <section class="screen" id="report">
+          <div class="section-heading"><div><p class="eyebrow">MISSION BT-2409-17 · GENERATED REPORT</p><h2>Automated anomaly report</h2></div><div class="report-actions"><button class="outline-button" data-download="csv">↓ Download CSV</button><button class="button small" data-download="json">↓ Download JSON</button></div></div>
+          <div class="report-summary"><div><small>TARGETS DETECTED</small><b>7</b></div><div><small>CONFIRMED</small><b class="green">5</b></div><div><small>REJECTED</small><b>2</b></div><div><small>CRITICAL</small><b class="red">2</b></div><div><small>SURVEY AREA</small><b>0.84 <small>km²</small></b></div><div><small>PROCESSING TIME</small><b>02:18</b></div></div>
+          <div class="table-wrap"><table><thead><tr><th>Target ID</th><th>Classification</th><th>Confidence</th><th>Priority</th><th>Latitude</th><th>Longitude</th><th>Length</th><th>Width</th><th></th></tr></thead><tbody><tr class="selected-row"><td>T-001</td><td><b>Shipwreck</b></td><td>91%</td><td><span class="priority critical">Critical</span></td><td>28.6143° N</td><td>77.2088° E</td><td>18.4m</td><td>5.2m</td><td>›</td></tr><tr><td>T-002</td><td><b>Ghost Net</b></td><td>84%</td><td><span class="priority high">High</span></td><td>28.6140° N</td><td>77.2081° E</td><td>6.8m</td><td>2.1m</td><td>›</td></tr><tr><td>T-003</td><td><b>Pipeline</b></td><td>88%</td><td><span class="priority high">High</span></td><td>28.6136° N</td><td>77.2093° E</td><td>26.2m</td><td>1.4m</td><td>›</td></tr><tr><td>T-004</td><td><b>Cylinder</b></td><td>78%</td><td><span class="priority medium">Medium</span></td><td>28.6131° N</td><td>77.2085° E</td><td>1.8m</td><td>0.6m</td><td>›</td></tr></tbody></table></div>
+          <div class="mission-result"><div class="mini-map"><i></i><i></i><i></i><i></i><i></i></div><div><p class="eyebrow">MISSION RESULTS</p><h3>Five confirmed targets mapped<br/>across the survey area.</h3><p>Report ready for export and response planning.</p></div><button class="text-button" data-go="upload">Start new analysis <b>↺</b></button></div>
+        </section>
+      </main>
+      <footer>BLUTRACE AI · AI-Powered Automated Underwater Marine Debris & Anomaly Detection · <span>Frontend prototype · Mock analysis data</span></footer>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
